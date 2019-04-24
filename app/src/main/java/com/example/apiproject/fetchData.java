@@ -14,13 +14,13 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class fetchData extends AsyncTask<Void,Void,Void> {
-    String jsonStr = "";
-    String data = "";
+public class fetchData extends AsyncTask<String,Void,String> {
     @Override
-    protected Void doInBackground(Void... voids) {
+    protected String doInBackground(String... params) {
+        String jsonStr = "";
         try {
-            URL url = new URL("https://data.calgary.ca/resource/35kd-jzrv.json?quadrant=NE");
+            String urlStr = String.format("https://data.calgary.ca/resource/35kd-jzrv.json?quadrant=%s",params[0]);
+            URL url = new URL(urlStr);
 
             //Open HTTPS connection
             HttpURLConnection conn = (HttpURLConnection)url.openConnection();
@@ -42,21 +42,20 @@ public class fetchData extends AsyncTask<Void,Void,Void> {
                 jsonStr = jsonStr + line;
             }
 
-
-
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return null;
+        return jsonStr;
     }
 
     @Override
-    protected void onPostExecute(Void aVoid) {
-        super.onPostExecute(aVoid);
+    protected void onPostExecute(String jsonStr) {
+        super.onPostExecute(jsonStr);
 
+        String data = "";
         try {
             JSONArray jsonArray = new JSONArray(jsonStr);
             for (int i = 0; i < jsonArray.length(); i++) {
@@ -69,6 +68,6 @@ public class fetchData extends AsyncTask<Void,Void,Void> {
             e.printStackTrace();
         }
 
-        MainActivity.data.setText(this.data);
+        MainActivity.data.setText(data);
     }
 }
