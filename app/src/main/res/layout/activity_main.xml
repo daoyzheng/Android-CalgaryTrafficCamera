@@ -6,19 +6,37 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <Spinner
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:entries="@array/quadrant_arrays"
-        android:prompt="@string/quadrant_prompt"
-        android:id="@+id/quadrantDropdown"/>
+        android:id="@+id/quadrantDisplay">
+
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:entries="@array/quadrant_arrays"
+            android:prompt="@string/quadrant_prompt"
+            android:id="@+id/quadrantDropdown" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25dp"
+            android:id="@+id/quadrantTest"/>
+
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/descriptionDisplay"/>
+
+    </LinearLayout>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Display"
         android:id="@+id/btnDisplay"
-        android:layout_below="@+id/quadrantDropdown"/>
+        android:layout_below="@+id/quadrantDisplay"/>
     
     <ScrollView
         android:layout_width="match_parent"

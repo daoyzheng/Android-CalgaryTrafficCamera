@@ -1,6 +1,8 @@
 package com.example.apiproject;
 
+import android.content.Context;
 import android.os.AsyncTask;
+import android.widget.ArrayAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -13,8 +15,16 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 public class fetchData extends AsyncTask<String,Void,String> {
+    private Context mContext;
+
+    public fetchData (Context mContext) {
+        this.mContext = mContext;
+    }
+
     @Override
     protected String doInBackground(String... params) {
         String jsonStr = "";
@@ -56,14 +66,20 @@ public class fetchData extends AsyncTask<String,Void,String> {
         super.onPostExecute(jsonStr);
 
         String data = "";
+        List<String> descriptionStr = new ArrayList<>();
+
         try {
             JSONArray jsonArray = new JSONArray(jsonStr);
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
+                descriptionStr.add(String.valueOf(jsonObject.get("description")));
                 data = data + "Quadrant: " + jsonObject.get("quadrant") + "\n" +
                         "Description: " + jsonObject.get("description") + "\n" +
                         "URL: " + jsonObject.get("url") + "\n\n";
             }
+            ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(mContext,android.R.layout.simple_spinner_item, descriptionStr);
+            dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            MainActivity.descriptionDisplay.setAdapter(dataAdapter);
         } catch (JSONException e) {
             e.printStackTrace();
         }
