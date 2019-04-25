@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">ApiProject</string>
+    <string name="quadrant_prompt">Choose a country</string>
+    <string-array name="quadrant_arrays">
+        <item>NW</item>
+        <item>NE</item>
+        <item>SW</item>
+        <item>SE</item>
+    </string-array>
 </resources>

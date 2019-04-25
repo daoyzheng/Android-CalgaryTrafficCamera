@@ -60,8 +60,8 @@ public class fetchData extends AsyncTask<String,Void,String> {
             JSONArray jsonArray = new JSONArray(jsonStr);
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                data = data + "Description: " + jsonObject.get("description") + "\n" +
-                        "Quadrant: " + jsonObject.get("quadrant") + "\n" +
+                data = data + "Quadrant: " + jsonObject.get("quadrant") + "\n" +
+                        "Description: " + jsonObject.get("description") + "\n" +
                         "URL: " + jsonObject.get("url") + "\n\n";
             }
         } catch (JSONException e) {

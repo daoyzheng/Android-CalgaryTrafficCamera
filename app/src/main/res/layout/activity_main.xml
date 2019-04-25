@@ -8,12 +8,17 @@
 
     <Spinner
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"></Spinner>
+        android:layout_height="wrap_content"
+        android:entries="@array/quadrant_arrays"
+        android:prompt="@string/quadrant_prompt"
+        android:id="@+id/quadrantDropdown"/>
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Display"
-        android:id="@+id/btnDisplay"/>
+        android:id="@+id/btnDisplay"
+        android:layout_below="@+id/quadrantDropdown"/>
     
     <ScrollView
         android:layout_width="match_parent"
