@@ -12,6 +12,7 @@
 Displays real-time traffic camera feed using the Open Calgary Traffic Camera API
 
 ## Problems Encountered
+These are the problems encountered when working on this project
 - API Query Parameter cannot contain `&`
 - Enable internet permission in the android manifest in order to access internet
   - `<uses-permission android:name="android.permission.INTERNET"/>`
