@@ -12,3 +12,4 @@
 Displays real-time traffic camera feed using the Open Calgary Traffic Camera API
 
 ## Problems Encountered
+### API Query Parameter cannot contain `&`
