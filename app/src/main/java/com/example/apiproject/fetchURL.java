@@ -1,8 +1,12 @@
 package com.example.apiproject;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.AsyncTask;
+import android.view.View;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -19,6 +23,13 @@ import java.net.URL;
 public class fetchURL extends AsyncTask <MainActivity.AsyncTaskParams, Void, Void> {
     String data = "";
     Bitmap bitmap = null;
+    String imgURL = null;
+    private Context mContext;
+
+    public fetchURL (Context mContext) {
+       this.mContext = mContext;
+    }
+
     @Override
     protected Void doInBackground(MainActivity.AsyncTaskParams... asyncTaskParams) {
         String jsonStr = "";
@@ -64,14 +75,14 @@ public class fetchURL extends AsyncTask <MainActivity.AsyncTaskParams, Void, Voi
             JSONArray jsonArray = new JSONArray(jsonStr);
             for (int i=0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                data = data + "Quadrant: " + jsonObject.get("quadrant") + "\n" +
-                        "Description: " + jsonObject.get("description") + "\n" +
-                        "URL: " + jsonObject.get("url") + "\n\n";
+                data = data + "Quadrant:\n" + jsonObject.get("quadrant") + "\n\n" +
+                        "Intersections:\n" + jsonObject.get("description");
+                        //"URL: " + jsonObject.get("url") + "\n\n";
             }
 
             if (jsonArray.length() == 1) {
                 JSONObject jsonObject = jsonArray.getJSONObject(0);
-                String imgURL = jsonObject.get("url").toString();
+                imgURL = jsonObject.get("url").toString();
                 bitmap = BitmapFactory.decodeStream((InputStream) new URL(imgURL).getContent());
             }
 
@@ -92,6 +103,15 @@ public class fetchURL extends AsyncTask <MainActivity.AsyncTaskParams, Void, Voi
 
         MainActivity.data.setText(data);
         MainActivity.cameraDisplay.setImageBitmap(bitmap);
+
+        MainActivity.cameraDisplay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(imgURL));
+                mContext.startActivity(intent);
+            }
+        });
 
     }
 }

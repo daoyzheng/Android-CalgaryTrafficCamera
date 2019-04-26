@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
                 // Create wrapper object and pass it to AsyncTask
                 AsyncTaskParams params = new AsyncTaskParams(quadrant, description);
-                fetchURL urlProcess = new fetchURL();
+                fetchURL urlProcess = new fetchURL(MainActivity.this);
                 urlProcess.execute(params);
             }
         });
