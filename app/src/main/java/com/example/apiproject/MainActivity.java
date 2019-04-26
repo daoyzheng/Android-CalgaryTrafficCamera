@@ -30,6 +30,15 @@ public class MainActivity extends AppCompatActivity {
         btnDisplay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Get value selected from description spinner
+                String description = descriptionDisplay.getSelectedItem().toString();
+                // Get value selected from quadrant spinner
+                String quadrant = quadrantDropDown.getSelectedItem().toString();
+
+                // Create wrapper object and pass it to AsyncTask
+                AsyncTaskParams params = new AsyncTaskParams(quadrant, description);
+                fetchURL urlProcess = new fetchURL();
+                urlProcess.execute(params);
             }
         });
 
@@ -40,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
                 String quadrant = quadrantDropDown.getSelectedItem().toString();
                 quadrantTest.setText(quadrant);
 
+                // Fetch description and populate description drop down
                 fetchData process = new fetchData(getApplicationContext());
                 process.execute(quadrant);
 
@@ -50,6 +60,17 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    // Wrapper class to pass parameters to AsyncTask
+    public static class AsyncTaskParams {
+        String quadrant;
+        String description;
+
+        AsyncTaskParams(String quadrant, String description) {
+            this.quadrant = quadrant;
+            this.description = description;
+        }
     }
 
 }
