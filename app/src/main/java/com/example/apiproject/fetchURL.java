@@ -26,7 +26,19 @@ public class fetchURL extends AsyncTask <MainActivity.AsyncTaskParams, Void, Voi
             String quadrant = asyncTaskParams[0].quadrant;
             String description = asyncTaskParams[0].description;
 
-            String urlStr = String.format("https://data.calgary.ca/resource/35kd-jzrv.json?quadrant=%s&description=%s",quadrant,description);
+            // If description contains '&', remove it and the rest of the string,
+            // since it's not allowed in the query parameter
+            // then use $starts_with query function
+            String urlStr;
+            int index;
+            if ((index = description.indexOf('&')) == -1) {
+                // Does not contain '&'
+                urlStr = String.format("https://data.calgary.ca/resource/35kd-jzrv.json?quadrant=%s&description=%s",quadrant,description);
+            } else {
+                description = description.substring(0,index);
+                urlStr = String.format("https://data.calgary.ca/resource/35kd-jzrv.json?quadrant=%s&$where=starts_with(description,'%s')",quadrant,description);
+            }
+
             URL url = new URL(urlStr);
 
             //Open HTTPS connection
