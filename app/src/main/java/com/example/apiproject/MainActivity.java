@@ -13,7 +13,6 @@ public class MainActivity extends AppCompatActivity {
 
     Button btnDisplay;
     Spinner quadrantDropDown;
-    TextView quadrantTest;
 
     public static ImageView cameraDisplay;
     public static Spinner descriptionDisplay;
@@ -28,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
         btnDisplay = findViewById(R.id.btnDisplay);
         quadrantDropDown = findViewById(R.id.quadrantDropdown);
         descriptionDisplay = findViewById(R.id.descriptionDisplay);
-        quadrantTest = findViewById(R.id.quadrantTest);
         cameraDisplay = findViewById(R.id.cameraDisplay);
 
         btnDisplay.setOnClickListener(new View.OnClickListener() {
@@ -51,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 // Get value selected from spinner
                 String quadrant = quadrantDropDown.getSelectedItem().toString();
-                quadrantTest.setText(quadrant);
 
                 // Fetch description and populate description drop down
                 fetchData process = new fetchData(getApplicationContext());
