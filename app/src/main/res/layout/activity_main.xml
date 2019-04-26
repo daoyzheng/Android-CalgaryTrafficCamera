@@ -41,6 +41,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/scrollText"
         android:layout_below="@+id/btnDisplay">
         <TextView
             android:layout_width="match_parent"
@@ -48,7 +49,14 @@
             android:text="Hello World!"
             android:id="@+id/displayView"
             android:textSize="24dp"/>
+
     </ScrollView>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cameraDisplay"
+        android:layout_below="@+id/scrollText"/>
 
 
 </RelativeLayout>

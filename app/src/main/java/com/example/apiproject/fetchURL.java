@@ -1,5 +1,7 @@
 package com.example.apiproject;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 
 import org.json.JSONArray;
@@ -14,10 +16,11 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class fetchURL extends AsyncTask <MainActivity.AsyncTaskParams, Void, String> {
-
+public class fetchURL extends AsyncTask <MainActivity.AsyncTaskParams, Void, Void> {
+    String data = "";
+    Bitmap bitmap = null;
     @Override
-    protected String doInBackground(MainActivity.AsyncTaskParams... asyncTaskParams) {
+    protected Void doInBackground(MainActivity.AsyncTaskParams... asyncTaskParams) {
         String jsonStr = "";
         try {
             String quadrant = asyncTaskParams[0].quadrant;
@@ -46,22 +49,6 @@ public class fetchURL extends AsyncTask <MainActivity.AsyncTaskParams, Void, Str
                 jsonStr = jsonStr + line;
             }
 
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return jsonStr;
-    }
-
-    @Override
-    protected void onPostExecute(String jsonStr) {
-        super.onPostExecute(jsonStr);
-
-        String data = "";
-
-        try {
             JSONArray jsonArray = new JSONArray(jsonStr);
             for (int i=0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
@@ -69,10 +56,30 @@ public class fetchURL extends AsyncTask <MainActivity.AsyncTaskParams, Void, Str
                         "Description: " + jsonObject.get("description") + "\n" +
                         "URL: " + jsonObject.get("url") + "\n\n";
             }
+
+            if (jsonArray.length() == 1) {
+                JSONObject jsonObject = jsonArray.getJSONObject(0);
+                String imgURL = jsonObject.get("url").toString();
+                bitmap = BitmapFactory.decodeStream((InputStream) new URL(imgURL).getContent());
+            }
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
+        return null;
+    }
+
+    @Override
+    protected void onPostExecute(Void aVoid) {
+        super.onPostExecute(aVoid);
+
         MainActivity.data.setText(data);
+        MainActivity.cameraDisplay.setImageBitmap(bitmap);
+
     }
 }

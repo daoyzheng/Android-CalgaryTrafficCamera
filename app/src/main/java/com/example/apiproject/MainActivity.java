@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -13,6 +14,8 @@ public class MainActivity extends AppCompatActivity {
     Button btnDisplay;
     Spinner quadrantDropDown;
     TextView quadrantTest;
+
+    public static ImageView cameraDisplay;
     public static Spinner descriptionDisplay;
     public static TextView data;
 
@@ -26,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
         quadrantDropDown = findViewById(R.id.quadrantDropdown);
         descriptionDisplay = findViewById(R.id.descriptionDisplay);
         quadrantTest = findViewById(R.id.quadrantTest);
+        cameraDisplay = findViewById(R.id.cameraDisplay);
 
         btnDisplay.setOnClickListener(new View.OnClickListener() {
             @Override
