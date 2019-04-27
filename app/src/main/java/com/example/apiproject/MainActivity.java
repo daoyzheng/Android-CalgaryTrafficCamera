@@ -1,13 +1,21 @@
 package com.example.apiproject;
 
+import android.app.Dialog;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.android.gms.common.api.GoogleApiActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,6 +30,25 @@ public class MainActivity extends AppCompatActivity {
     public static Spinner descriptionDisplay;
     public static TextView data;
 
+    public boolean isServicesOK() {
+        Log.d(TAG, "isServicesOK: checking google services version");
+
+        int available = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(MainActivity.this);
+
+        if (available == ConnectionResult.SUCCESS) {
+            // everything is fine and the user can make map requests
+            Log.d(TAG, "isServicesOK: Google Play Services is working");
+            return true;
+        } else if (GoogleApiAvailability.getInstance().isUserResolvableError(available)) {
+            // an error occurred but we can resolve it
+            Log.d(TAG, "isServicesOK: an error occurred but we can fix it");
+            Dialog dialog = GoogleApiAvailability.getInstance().getErrorDialog(MainActivity.this, available, ERROR_DIALOG_REQUEST);
+            dialog.show();
+        } else {
+            Toast.makeText(this,"You can't make map requests", Toast.LENGTH_SHORT).show();
+        }
+        return false;
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +59,10 @@ public class MainActivity extends AppCompatActivity {
         quadrantDropDown = findViewById(R.id.quadrantDropdown);
         descriptionDisplay = findViewById(R.id.descriptionDisplay);
         cameraDisplay = findViewById(R.id.cameraDisplay);
+
+        if (isServicesOK()) {
+            init();
+        }
 
         btnDisplay.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,6 +94,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
+            }
+        });
+    }
+
+    private void init() {
+        Button btnShowMap = findViewById(R.id.btnShowMap);
+
+        btnShowMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, MapActivity.class);
+                startActivity(intent);
             }
         });
     }
