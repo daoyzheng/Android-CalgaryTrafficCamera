@@ -8,6 +8,9 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.view.View;
 
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -84,6 +87,13 @@ public class fetchURL extends AsyncTask <MainActivity.AsyncTaskParams, Void, Voi
                 JSONObject jsonObject = jsonArray.getJSONObject(0);
                 imgURL = jsonObject.get("url").toString();
                 bitmap = BitmapFactory.decodeStream((InputStream) new URL(imgURL).getContent());
+
+                // Get longitude and latitude
+                MapActivity.lat = Double.parseDouble(jsonObject.get("latitude").toString());
+                MapActivity.lng = Double.parseDouble(jsonObject.get("longitude").toString());
+
+                // Get description
+                MapActivity.description = jsonObject.get("description").toString();
             }
 
         } catch (MalformedURLException e) {
