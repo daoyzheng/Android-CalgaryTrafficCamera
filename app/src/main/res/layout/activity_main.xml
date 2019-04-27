@@ -32,25 +32,28 @@
         android:id="@+id/btnDisplay"
         android:layout_below="@+id/quadrantDisplay"/>
     
-    <ScrollView
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/scrollText"
-        android:layout_below="@+id/btnDisplay">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Hello World!"
-            android:id="@+id/displayView"
-            android:textSize="24dp"/>
+        android:layout_height="match_parent"
+        android:text=""
+        android:id="@+id/displayView"
+        android:textSize="24dp"/>
 
-    </ScrollView>
+
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/map"
+        tools:context=".MapsActivity"
+        android:name="com.google.android.gms.maps.SupportMapFragment" />
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/cameraDisplay"
-        android:layout_below="@+id/scrollText"/>
+        android:layout_below="@+id/displayView"/>
+
 
 
 </RelativeLayout>

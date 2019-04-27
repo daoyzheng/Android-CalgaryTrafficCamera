@@ -112,6 +112,5 @@ public class fetchURL extends AsyncTask <MainActivity.AsyncTaskParams, Void, Voi
                 mContext.startActivity(intent);
             }
         });
-
     }
 }
