@@ -25,26 +25,34 @@
 
     </LinearLayout>
 
-    <Button
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Display"
-        android:id="@+id/btnDisplay"
-        android:layout_below="@+id/quadrantDisplay"/>
+        android:layout_below="@id/quadrantDisplay"
+        android:id="@+id/btnLayout">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Show Map"
-        android:id="@+id/btnShowMap"
-        android:layout_below="@+id/btnDisplay"/>
-    
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Display"
+            android:id="@+id/btnDisplay"
+            android:layout_below="@+id/quadrantDisplay"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Show Map"
+            android:id="@+id/btnShowMap"
+            android:layout_below="@+id/btnDisplay"/>
+
+    </LinearLayout>
+
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="wrap_content"
         android:text=""
         android:id="@+id/displayView"
-        android:layout_below="@+id/btnShowMap"
+        android:layout_below="@+id/btnLayout"
         android:textSize="24dp"/>
 
 
