@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
     Button btnDisplay;
     Spinner quadrantDropDown;
+    Button btnShowMap;
 
     public static ImageView cameraDisplay;
     public static Spinner descriptionDisplay;
@@ -58,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
         quadrantDropDown = findViewById(R.id.quadrantDropdown);
         descriptionDisplay = findViewById(R.id.descriptionDisplay);
         cameraDisplay = findViewById(R.id.cameraDisplay);
+        btnShowMap = findViewById(R.id.btnShowMap);
 
         if (isServicesOK()) {
             init();
@@ -75,6 +77,20 @@ public class MainActivity extends AppCompatActivity {
                 AsyncTaskParams params = new AsyncTaskParams(quadrant, description);
                 fetchURL urlProcess = new fetchURL(MainActivity.this);
                 urlProcess.execute(params);
+
+                btnShowMap.setVisibility(View.VISIBLE);
+            }
+        });
+
+        descriptionDisplay.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                btnShowMap.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
 
@@ -98,7 +114,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void init() {
-        Button btnShowMap = findViewById(R.id.btnShowMap);
 
         btnShowMap.setOnClickListener(new View.OnClickListener() {
             @Override
