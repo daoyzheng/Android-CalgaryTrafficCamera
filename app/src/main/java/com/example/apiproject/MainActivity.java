@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
         descriptionDisplay.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                btnShowMap.setVisibility(View.GONE);
+                btnShowMap.setVisibility(View.INVISIBLE);
             }
 
             @Override

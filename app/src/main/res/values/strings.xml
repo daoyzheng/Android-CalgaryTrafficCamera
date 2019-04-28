@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">Calgary Traffic Camera</string>
     <string name="quadrant_prompt">Choose a quadrant</string>
+    <string name="please_select_a_quadrant_and_intersection">Please Select a Quadrant and Intersection</string>
+    <string name="display">Display</string>
+    <string name="show_map">Show Intersection On Map</string>
     <string-array name="quadrant_arrays">
         <item>NW</item>
         <item>NE</item>

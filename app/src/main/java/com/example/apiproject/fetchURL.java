@@ -111,7 +111,7 @@ public class fetchURL extends AsyncTask <MainActivity.AsyncTaskParams, Void, Voi
     protected void onPostExecute(Void aVoid) {
         super.onPostExecute(aVoid);
 
-        MainActivity.data.setText(data);
+        //MainActivity.data.setText(data);
         MainActivity.cameraDisplay.setImageBitmap(bitmap);
 
         MainActivity.cameraDisplay.setOnClickListener(new View.OnClickListener() {

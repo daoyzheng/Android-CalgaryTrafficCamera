@@ -6,6 +6,7 @@
     style="?android:attr/spinnerDropDownItemStyle"
     android:singleLine="true"
     android:ellipsize="marquee"
+    android:textColor="@android:color/background_dark"
     android:textSize="20sp"/>
 
 
