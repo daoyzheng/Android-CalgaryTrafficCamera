@@ -49,4 +49,7 @@ These are the problems encountered when working on this project
 **Problem:** Cannot run network on mainthread
 - Use `AsyncTask` to run URL requests in the background
 
+## Future Development
+- Add search bar to search for geolocation within Google Map 
+
 
