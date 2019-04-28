@@ -79,7 +79,7 @@ public class fetchURL extends AsyncTask <MainActivity.AsyncTaskParams, Void, Voi
             for (int i=0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                 data = data + "Quadrant:\n" + jsonObject.get("quadrant") + "\n\n" +
-                        "Intersections:\n" + jsonObject.get("description");
+                        "Intersection:\n" + jsonObject.get("description");
                         //"URL: " + jsonObject.get("url") + "\n\n";
             }
 

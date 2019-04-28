@@ -75,8 +75,8 @@ public class fetchData extends AsyncTask<String,Void,String> {
             }
 
             // Populate Description spinner
-            ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(mContext,android.R.layout.simple_spinner_item, descriptionStr);
-            dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(mContext,R.layout.spinner_item, descriptionStr);
+            dataAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
             MainActivity.descriptionDisplay.setAdapter(dataAdapter);
         } catch (JSONException e) {
             e.printStackTrace();

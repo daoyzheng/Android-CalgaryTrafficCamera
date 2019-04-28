@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -64,6 +65,11 @@ public class MainActivity extends AppCompatActivity {
         if (isServicesOK()) {
             init();
         }
+
+        // Set custom layout to spinner
+        ArrayAdapter<CharSequence> dataAdapter = ArrayAdapter.createFromResource(this,R.array.quadrant_arrays,R.layout.spinner_item);
+        dataAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
+        quadrantDropDown.setAdapter(dataAdapter);
 
         btnDisplay.setOnClickListener(new View.OnClickListener() {
             @Override
