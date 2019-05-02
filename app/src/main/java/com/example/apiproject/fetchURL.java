@@ -8,9 +8,6 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.view.View;
 
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -79,13 +76,13 @@ public class fetchURL extends AsyncTask <MainActivity.AsyncTaskParams, Void, Voi
             for (int i=0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                 data = data + "Quadrant:\n" + jsonObject.get("quadrant") + "\n\n" +
-                        "Intersection:\n" + jsonObject.get("description");
-                        //"URL: " + jsonObject.get("url") + "\n\n";
+                        "Intersection:\n" + jsonObject.get("description") + "\n\n" +
+                        "URL:\n" + jsonObject.getJSONObject("url").get("url") + "\n\n";
             }
 
             if (jsonArray.length() == 1) {
                 JSONObject jsonObject = jsonArray.getJSONObject(0);
-                imgURL = jsonObject.get("url").toString();
+                imgURL = jsonObject.getJSONObject("url").get("url").toString();
                 bitmap = BitmapFactory.decodeStream((InputStream) new URL(imgURL).getContent());
 
                 // Get longitude and latitude
